@@ -1,1 +1,1 @@
-This is the master branch. This version is stable
+This is the develop branch. This version is stable
