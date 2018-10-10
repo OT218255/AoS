@@ -1,12 +1,13 @@
 import pygame, main
 from pygame.locals import *
 
-def getPixelAtClick():
+def getPixelAtClick(direction):
     mouseDownPos = pygame.mouse.get_pos()
     print(mouseDownPos)
     main.checkForQuit()
     mouseUpPos = getPointAtLift()
-    mousePositionCompair(mouseDownPos, mouseUpPos, 0)
+    direction = mousePositionCompair(mouseDownPos, mouseUpPos, direction)
+    return direction
 
 def getPointAtLift():
     mouseUp = False
@@ -17,12 +18,25 @@ def getPointAtLift():
             print(mouseUpPos)
         main.checkForQuit()
     pygame.event.clear()
-    return(mouseUpPos)
+    return mouseUpPos
 
 def mousePositionCompair(mouseDown, mouseUp, direction):
     print("The mouse positions are: ", mouseDown, mouseUp)
-    if mouseUp[0] > mouseDown[0]:
-        direction += 1
-    if mouseUp[0] < mouseDown[0]:
-        direction -= 1
-    print(direction)
+    if abs(mouseUp[0] - mouseDown[0]) > abs(mouseUp[1] - mouseDown[1]):
+        if abs(mouseUp[0] - mouseDown[0]) > 100:
+            if mouseDown[0] > mouseUp[0]:
+                direction = 3
+            else:
+                direction = 1
+        else:
+            print('click')
+    else:
+        if abs(mouseUp[1] - mouseDown[1]) > 100:
+            if mouseDown[1] > mouseUp[1]:
+                direction = 0
+            else:
+                direction = 2
+        else:
+            print("click")
+    return direction
+
