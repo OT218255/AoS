@@ -40,3 +40,7 @@ def mousePositionCompair(mouseDown, mouseUp, direction):
             print("click")
     return direction
 
+def getDirection(directions, currentDirection):
+    if currentDirection in directions:
+        facingDirections = directions[currentDirection]
+        return facingDirections

@@ -12,9 +12,9 @@ def main():
     playerDirection = 0
     DIRECTIONS = {0: "UP", 1: "RIGHT", 2: "DOWN", 3: "LEFT"}
     while True:
-        for event in pygame.event.get(MOUSEBUTTONDOWN):
-            playerDirection = inputs.getPixelAtClick(playerDirection)
-            print(playerDirection)
+        for event in pygame.event.get(MOUSEBUTTONDOWN): # checks to see if the mouse button is down
+            playerDirection = inputs.getPixelAtClick(playerDirection) # returns numeric value for the players direction
+            facingDirection = inputs.getDirection(DIRECTIONS, playerDirection) # returns string of direction from dict
         checkForQuit() # Moved the quit code into a function (feel free to ask me why and I'll explain)
         pygame.display.flip() # Updates the display
         FPSCLOCK.tick(FPS)
