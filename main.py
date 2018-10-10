@@ -1,4 +1,4 @@
-import pygame, sys, moduleTest # import the module
+import pygame, sys, inputs # import the module
 from pygame.locals import *
 
 
@@ -9,8 +9,12 @@ def main():
     WINDOWHEIGHT = 750 # Window height constant
     DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT)) # Main surface
     FPSCLOCK = pygame.time.Clock() # clock
+    playerDirection = 0
+    DIRECTIONS = {0: "UP", 1: "RIGHT", 2: "DOWN", 3: "LEFT"}
     while True:
-        moduleTest.drawRectangle(DISPLAYSURF) # Example of calling a function from a module.
+        for event in pygame.event.get(MOUSEBUTTONDOWN):
+            playerDirection = inputs.getPixelAtClick(playerDirection)
+            print(playerDirection)
         checkForQuit() # Moved the quit code into a function (feel free to ask me why and I'll explain)
         pygame.display.flip() # Updates the display
         FPSCLOCK.tick(FPS)
