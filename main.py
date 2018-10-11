@@ -1,24 +1,45 @@
-import pygame, sys, inputs # import the module
+import pygame, sys, inputs, const, player  # import the module
 from pygame.locals import *
+from const import *
 
 
 def main():
     pygame.init()
-    FPS = 30
-    WINDOWWIDTH = 1334 # Window width constant
-    WINDOWHEIGHT = 750 # Window height constant
     DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT)) # Main surface
     FPSCLOCK = pygame.time.Clock() # clock
     playerDirection = 0
+    facingDirection = ""
     DIRECTIONS = {0: "UP", 1: "RIGHT", 2: "DOWN", 3: "LEFT"}
+    playerClass = player.Player()
+    x, y = 0, 0
+    moving = False
     while True:
         for event in pygame.event.get(MOUSEBUTTONDOWN): # checks to see if the mouse button is down
-            playerDirection = inputs.getPixelAtClick(playerDirection) # returns numeric value for the players direction
-            facingDirection = inputs.getDirection(DIRECTIONS, playerDirection) # returns string of direction from dict
+            if moving == False:
+                playerDirection = inputs.getPixelAtClick(playerDirection)
+                facingDirection = inputs.getDirection(DIRECTIONS, playerDirection) # returns string direction from dict
+            x, y = changeXandY(x, y, facingDirection)
+            moving = True
+        if moving:
+            DISPLAYSURF.fill(background)
+            playerSprite = player.Player.loadSprite(playerClass, facingDirection)
+            DISPLAYSURF.blit(playerSprite, (x, y))
+            moving = False
         checkForQuit() # Moved the quit code into a function (feel free to ask me why and I'll explain)
         pygame.display.flip() # Updates the display
         FPSCLOCK.tick(FPS)
 
+
+def changeXandY(x, y, movementDirection):
+    if movementDirection == "UP":
+        y -= 44
+    elif movementDirection == "RIGHT":
+        x += 44
+    elif movementDirection == "DOWN":
+        y += 44
+    elif movementDirection == "LEFT":
+        x -= 44
+    return x, y
 
 def terminate(): # This function just quits
     pygame.quit()
