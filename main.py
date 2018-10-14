@@ -15,14 +15,13 @@ def main():
     glideX, glideY = 0, 0
     moving = False
     while True:
-        for event in pygame.event.get(): # checks to see if the mouse button is down
-            if event.type == MOUSEBUTTONDOWN:
-                if moving == False: # If the player is not moving
-                    playerDirection = inputs.getPixelAtClick(playerDirection)
-                    facingDirection = inputs.getDirection(DIRECTIONS, playerDirection)
-                glideX, glideY = player.changeXandY(x, y, facingDirection) # sets destination x and y for sprite
-                print("XX")
-                moving = True # Sets moving to true so that another movement cannot be made
+        event = getEvent() # checks to see if the mouse button is down
+        if event == MOUSEBUTTONDOWN:
+            if moving == False: # If the player is not moving
+                playerDirection = inputs.getPixelAtClick(playerDirection, event)
+                facingDirection = inputs.getDirection(DIRECTIONS, playerDirection)
+                moving = True  # Sets moving to true so that another movement cannot be made
+            glideX, glideY = player.changeXandY(x, y, facingDirection) # sets destination x and y for sprite
         if moving: # If moving is true
             while x != glideX or y != glideY: # while the x and y are not the same as the glide x and y
                 DISPLAYSURF.fill(background) # fill the background to remove previous drawings
@@ -32,7 +31,7 @@ def main():
                 pygame.display.flip()
                 FPSCLOCK.tick(FPS)
         moving = False
-        checkForQuit() # Moved the quit code into a function (feel free to ask me why and I'll explain)
+        checkForQuit(event) # Moved the quit code into a function (feel free to ask me why and I'll explain)
         pygame.display.flip() # Updates the display
         FPSCLOCK.tick(FPS)
 
@@ -42,10 +41,13 @@ def terminate(): # This function just quits
     sys.exit()
 
 
-def checkForQuit(): # this function checks if the events for quit are met
-    for event in pygame.event.get(QUIT):
+def checkForQuit(event): # this function checks if the events for quit are met
+    if event == QUIT:
         terminate()
 
+def getEvent():
+    for event in pygame.event.get():
+        return event.type
 
 if __name__ == "__main__":
     main()
