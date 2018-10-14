@@ -1,28 +1,22 @@
-import pygame, main, random
+import pygame, main
 from pygame.locals import *
 
 
-def getPixelAtClick(direction):
+def getPixelAtClick(direction, event):
     mouseDownPos = pygame.mouse.get_pos()
-    main.checkForQuit()
-    mouseUpPos = getPointAtLift()
+    mouseUpPos = getPointAtLift(event)
     direction = mousePositionCompair(mouseDownPos, mouseUpPos, direction)
     return direction
 
 
-def getPointAtLift():
+def getPointAtLift(event):
     mouseUp = False
     while mouseUp == False:
-        #print("Ohh cheeky the mouse bool is false")
         for event in pygame.event.get():
             if event.type == MOUSEBUTTONUP:
-                print("Ohh sexy the event is MOUSEBUTTONUP")
                 mouseUpPos = pygame.mouse.get_pos()
                 mouseUp = True
-        main.checkForQuit()
-    pygame.event.clear()
     return mouseUpPos
-
 
 
 def mousePositionCompair(mouseDown, mouseUp, direction):

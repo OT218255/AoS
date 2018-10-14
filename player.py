@@ -1,4 +1,4 @@
-import pygame, const
+import main, pygame, const
 from pygame.locals import *
 from const import *
 
