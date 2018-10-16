@@ -2,7 +2,6 @@ import main, pygame, const
 from pygame.locals import *
 from const import *
 
-
 class Player(object):
     def loadSprite(self, direction): # This just loads the spites dummy
         playerSprite = pygame.image.load("Assets/Art/BasicBoiUp.PNG")
