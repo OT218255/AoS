@@ -3,7 +3,7 @@ from pygame.locals import *
 from const import *
 
 class Player(object):
-    def loadSprite(self, direction): # This just loads the spites dummy
+    def loadSprite(self, direction): # This just loads the sprites dummy
         playerSprite = pygame.image.load("Assets/Art/BasicBoiUp.PNG")
         if direction == "UP":
             playerSprite = pygame.image.load("Assets/Art/BasicBoiUp.PNG")
