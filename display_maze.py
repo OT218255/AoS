@@ -24,7 +24,7 @@ def display_maze(start_side):
                 'R': "Assets/Art/SandDoorRight.png",
                 'D': "Assets/Art/SandDoorDown.png",
                 'L': "Assets/Art/SandDoorLeft.png",
-                'X': "Assets/Art/SandDoorUp.png"}
+                'X': "Assets/Art/SandFloor1.png"}
 
     pygame.draw.rect(surface, BLACK, (0, 0, width*44, height*44))
     # only needed until we sort the spawn tile
@@ -35,4 +35,5 @@ def display_maze(start_side):
             tile = pygame.image.load(tile_dict[maze[y][x]])
             surface.blit(tile, (x * 44, y * 44))
     pygame.image.save(surface, "Assets/Art/screen.jpg")  # save as a file
+    # saving as its own image might not be necessary, if we use diff surfaces
     return(maze)
