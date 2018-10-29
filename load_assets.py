@@ -15,13 +15,13 @@ def load_sprites():
     enemy_left   = pygame.image.load("Assets/Art/BadBoiLeft.PNG")
     enemy_sprites = [enemy_up, enemy_right, enemy_down, enemy_left]
     # Load environment sprites
-    sand_floor       = pygame.image.load("Assets/Art/SandFloor1.PNG")
-    sand_wall        = pygame.image.load("Assets/Art/SandWall1.PNG")
-    sand_pit         = pygame.image.load("Assets/Art/SandPit.PNG")
-    sand_door_up      = pygame.image.load("Assets/Art/SandDoorUp.PNG")
-    sand_door_right   = pygame.image.load("Assets/Art/SandDoorRight.PNG")
-    sand_door_down    = pygame.image.load("Assets/Art/SandDoorDown.PNG")
-    sand_door_left    = pygame.image.load("Assets/Art/SandDoorLeft.PNG")
+    sand_floor           = pygame.image.load("Assets/Art/SandFloor1.PNG")
+    sand_wall            = pygame.image.load("Assets/Art/SandWall1.PNG")
+    sand_pit             = pygame.image.load("Assets/Art/SandPit.PNG")
+    sand_door_up         = pygame.image.load("Assets/Art/SandDoorUp.PNG")
+    sand_door_right      = pygame.image.load("Assets/Art/SandDoorRight.PNG")
+    sand_door_down       = pygame.image.load("Assets/Art/SandDoorDown.PNG")
+    sand_door_left       = pygame.image.load("Assets/Art/SandDoorLeft.PNG")
     environment_sprite = [sand_floor, sand_wall, sand_pit, sand_door_up, sand_door_right, sand_door_down,
                           sand_door_left]
 

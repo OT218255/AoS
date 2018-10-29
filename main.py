@@ -1,21 +1,25 @@
-import pygame, sys, random, event_loop, game_loop, render_loop, consts, load_assets, entity
-from pygame.locals import *
+import pygame, sys, random, event_loop, game_loop, render_loop, load_assets
 from consts import *
+from entity import *
 
 
 def main():
     events_list = intialise_events()
     DISPLAY_SURFACE = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
     FPS_CLOCK = pygame.time.Clock()
-    player_sprites, enemy_sprites, environment_sprites = load_assets.load_sprites()
-    player_sprites, enemy_sprites, environment_sprites = convert_images(player_sprites,
-                                                                        enemy_sprites,
-                                                                        environment_sprites)
-    player = entity.Entity("player", player_sprites, 0, 0)
 
+    player_sprites, enemy_sprites, environment_sprites = load_assets.load_sprites()
+    player_sprites, enemy_sprites, environment_sprites = convert_images(
+                                                                        player_sprites,
+                                                                        enemy_sprites,
+                                                                        environment_sprites
+                                                                        )
+
+    player = Entity("player", player_sprites, 0, 0)
+    enemy = Entity("enemy", enemy_sprites, 166, 166)
     while True:
         events_list = event_loop.get_events(events_list)
-        game_state_list = game_loop.event_resolve(events_list)
+        game_state_list = game_loop.event_resolve(events_list, player)
         render_loop.display_update(DISPLAY_SURFACE, FPS_CLOCK, game_state_list)
         events_list = clear_events(events_list)
 
