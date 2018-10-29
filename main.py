@@ -1,24 +1,33 @@
-import pygame, sys, random, event_loop, game_loop, render_loop, consts, load_assets, player
+import pygame, sys, random, event_loop, game_loop, render_loop, consts, load_assets, entity
 from pygame.locals import *
 from consts import *
 
 
 def main():
-    mouse_down = False
-    mouse_up = False
-    quit_event = False
-    events_list = [mouse_down, mouse_up, quit_event]
+    events_list = intialise_events()
     DISPLAY_SURFACE = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
     FPS_CLOCK = pygame.time.Clock()
     player_sprites, enemy_sprites, environment_sprites = load_assets.load_sprites()
     player_sprites, enemy_sprites, environment_sprites = convert_images(player_sprites,
                                                                         enemy_sprites,
                                                                         environment_sprites)
+    player = entity.Entity("player", player_sprites, 0, 0)
+
     while True:
         events_list = event_loop.get_events(events_list)
-        game_state_list = game_loop.all_states_update(events_list, player_sprites, enemy_sprites, environment_sprites)
+        game_state_list = game_loop.event_resolve(events_list)
         render_loop.display_update(DISPLAY_SURFACE, FPS_CLOCK, game_state_list)
         events_list = clear_events(events_list)
+
+
+def intialise_events():
+    w_key_press = False
+    a_key_press = False
+    s_key_press = False
+    d_key_press = False
+    quit_event = False
+    events_list = [w_key_press, a_key_press, s_key_press, d_key_press, quit_event]
+    return events_list
 
 
 def convert_images(player_sprites, enemy_sprites, environment_sprites):
