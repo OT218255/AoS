@@ -1,0 +1,38 @@
+"""Holds the function to display the maze visually using pygame."""
+import pygame
+import array_gen
+from pygame.locals import *
+
+
+def display_maze(start_side):
+    """
+    Display the maze in pygame.
+
+    Calls array_gen to get a random array for the maze, and using tiledict
+    displays all the tiles to the screen once. Then saves the complete screen
+    as "screen.png". Also returns the array used.
+    """
+    width = 30
+    height = 17
+    pygame.init()
+    BLACK = (0, 0, 0)
+    surface = pygame.display.set_mode((width*44, height*44))
+    tile_dict = {0: "Assets/Art/SandFloor1.png",
+                1: "Assets/Art/SandWall1.png",
+                2: "Assets/Art/SandPit.png",
+                'U': "Assets/Art/SandDoorUp.png",
+                'R': "Assets/Art/SandDoorRight.png",
+                'D': "Assets/Art/SandDoorDown.png",
+                'L': "Assets/Art/SandDoorLeft.png",
+                'X': "Assets/Art/SandDoorUp.png"}
+
+    pygame.draw.rect(surface, BLACK, (0, 0, width*44, height*44))
+    # only needed until we sort the spawn tile
+    maze = array_gen.create_room(width, height, start_side)
+    # give maze size, and spawn location
+    for x in range(width):      # for each tile in the maze
+        for y in range(height):  # display the apropriate tile
+            tile = pygame.image.load(tile_dict[maze[y][x]])
+            surface.blit(tile, (x * 44, y * 44))
+    pygame.image.save(surface, "Assets/Art/screen.jpg")  # save as a file
+    return(maze)
