@@ -4,9 +4,10 @@ from pygame.locals import *
 
 def get_events(events_list):
     """
+    Check each possible event in the game in order to be resolved in the game loop.
 
-    :param events_list:
-    :return:
+    :param events_list:         List of each possible event in game.
+    :return:                    Returns event list to be passed to game loop.
     """
     for event in pygame.event.get():
         if event.type == KEYDOWN:

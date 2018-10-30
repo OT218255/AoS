@@ -4,11 +4,16 @@ import random
 
 def create_room(width, height, spawnside):
     """
-    Create am array of random numbers to act as the maze.
-
+    Create an array of random numbers to act as the maze.
+    
     Takes in width, height, and spawnside as variables to use when creating
     the maze. width and height determine its dimentions, while spawnside is
     used to generate the spawn tile and location of the exit door.
+    
+    :param width:           Width of the maze.
+    :param height:          Height of the maze.
+    :param spawnside:       Side the player spawns on.
+    :return:                Returns the generated array.
     """
     a = [[0 for i in range(width)] for j in range(height)]
     # create an array full of 0

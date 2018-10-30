@@ -3,7 +3,11 @@ from pygame.locals import *
 
 
 def load_sprites():
-    # Load player sprites
+    """
+    Load all player sprites into a list.
+
+    :return:        Pass back list of assets.
+    """
     player_up    = pygame.image.load("Assets/Art/BasicBoiUp.PNG")
     player_right = pygame.image.load("Assets/Art/BasicBoiRight.PNG")
     player_down  = pygame.image.load("Assets/Art/BasicBoiDown.PNG")
@@ -14,7 +18,6 @@ def load_sprites():
     enemy_down   = pygame.image.load("Assets/Art/BadBoiDown.PNG")
     enemy_left   = pygame.image.load("Assets/Art/BadBoiLeft.PNG")
     enemy_sprites = [enemy_up, enemy_right, enemy_down, enemy_left]
-    # Load environment sprites
     sand_floor           = pygame.image.load("Assets/Art/SandFloor1.PNG")
     sand_wall            = pygame.image.load("Assets/Art/SandWall1.PNG")
     sand_pit             = pygame.image.load("Assets/Art/SandPit.PNG")
