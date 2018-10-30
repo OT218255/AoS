@@ -11,7 +11,7 @@ def main():
     events_list = intialise_events()
     DISPLAY_SURFACE = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
     FPS_CLOCK = pygame.time.Clock()
-    # Initialise events, display and clock.
+    ''' Initialise events, display and clock. '''
     player_sprites, enemy_sprites, environment_sprites = load_assets.load_sprites()
     player_sprites, enemy_sprites, environment_sprites = convert_images(
                                                                         player_sprites,
@@ -25,8 +25,8 @@ def main():
             if array[x][y] == 'X':
                 spawn_tile = (y*TILE_SIZE, x*TILE_SIZE)
     ''' Initialise maze array. '''
-    player = Entity("player", player_sprites, spawn_tile[0], spawn_tile[1])
-    enemy = Entity("enemy", enemy_sprites, 166, 166)
+    player = Entity("player", player_sprites, spawn_tile[0], spawn_tile[1], spawn_tile[0], spawn_tile[1])
+    enemy = Entity("enemy", enemy_sprites, 166, 166, 166, 166)
     ''' Create player and enemy objects. '''
     while True:
         ''' Main game loop. '''
