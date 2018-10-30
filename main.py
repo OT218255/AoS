@@ -1,4 +1,4 @@
-import pygame, sys, random, event_loop, game_loop, render_loop, load_assets
+import pygame, sys, random, event_loop, game_loop, render_loop, load_assets, display_maze
 from consts import *
 from entity import *
 
@@ -14,8 +14,17 @@ def main():
                                                                         environment_sprites
                                                                         )
 
-    player = Entity("player", player_sprites, 0, 0)
+    """ Temp """
+    array = display_maze.display_maze(0)
+    for x in range(len(array)):
+        for y in range(len(array[0])):
+            if array[x][y] == 'X':
+                spawn_tile = (y*TILE_SIZE, x*TILE_SIZE)
+    """ ~ ~ ~ ~ """
+
+    player = Entity("player", player_sprites, spawn_tile[0], spawn_tile[1])
     enemy = Entity("enemy", enemy_sprites, 166, 166)
+
     while True:
         events_list = event_loop.get_events(events_list)
         game_state_list = game_loop.event_resolve(events_list, player)

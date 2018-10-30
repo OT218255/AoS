@@ -34,6 +34,6 @@ def display_maze(start_side):
         for y in range(height):  # display the apropriate tile
             tile = pygame.image.load(tile_dict[maze[y][x]])
             surface.blit(tile, (x * 44, y * 44))
-    pygame.image.save(surface, "Assets/Art/screen.jpg")  # save as a file
+    pygame.image.save(surface, "Assets/Art/screen.png")  # save as a file
     # saving as its own image might not be necessary, if we use diff surfaces
     return(maze)
