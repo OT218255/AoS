@@ -21,5 +21,6 @@ def display_update(DISPLAY_SURFACE, FPS_CLOCK, game_state_list):
         target_y = object_to_blit.target_y
         object_to_blit.x, object_to_blit.y = object_to_blit.incremental_movement(x, y, target_x, target_y, False)
         DISPLAY_SURFACE.blit(object_to_blit.sprites[0], (object_to_blit.x, object_to_blit.y))
-    pygame.display.flip()
-    FPS_CLOCK.tick(FPS)
+        pygame.display.flip()
+        FPS_CLOCK.tick(FPS)
+        return (target_y / 44, target_x / 44)
