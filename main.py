@@ -24,13 +24,14 @@ def main():
         for y in range(len(array[0])):
             if array[x][y] == 'X':
                 spawn_tile = (y*TILE_SIZE, x*TILE_SIZE)
+                player_location = [y, x]
     ''' Initialise maze array. '''
     player = Entity("player", player_sprites, spawn_tile[0], spawn_tile[1], spawn_tile[0], spawn_tile[1])
     enemy = Entity("enemy", enemy_sprites, 166, 166, 166, 166)
     ''' Create player and enemy objects. '''
     while True:
         ''' Main game loop. '''
-        events_list = event_loop.get_events(events_list)
+        events_list, player_location = event_loop.get_events(events_list, player, player_location, array)
         game_state_list = game_loop.event_resolve(events_list, player)
         render_loop.display_update(DISPLAY_SURFACE, FPS_CLOCK, game_state_list)
         events_list = clear_events(events_list)

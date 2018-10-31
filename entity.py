@@ -1,5 +1,5 @@
 from consts import *
-
+from itertools import cycle
 
 class Entity:
 
@@ -33,3 +33,18 @@ class Entity:
             y += SPEED
 
         return x, y
+
+    def collision_detection(self, location, array):
+        cyc = cycle(([0, -1], [1, 0], [0, 1], [-1, 0]))
+        # creates a cycle for getting adjacent tile location in order
+        #array = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
+        #location = [2,2]
+        bools = [True, True, True, True]
+        for i in range(4):
+            mod = next(cyc)
+            x_check = location[0] + mod[0]
+            y_check = location[1] + mod[1]
+            if array[y_check][x_check] == 1:
+                bools[i] = False
+        print(bools)
+        return bools
