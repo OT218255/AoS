@@ -37,5 +37,3 @@ def display_maze(start_side):
     pygame.image.save(surface, "Assets/Art/screen.png")  # save as a file
     # saving as its own image might not be necessary, if we use diff surfaces
     return(maze)
-
-display_maze(0)
