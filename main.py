@@ -33,8 +33,8 @@ def main():
     enemy = Entity("enemy", enemy_sprites, 166, 166, 166, 166)
     while True:
         ''' Main game loop. '''
-        events_list, player_location = event_loop.get_events(events_list, player, player_location, array)
-        game_state_list = game_loop.event_resolve(events_list, player)
+        events_list = event_loop.get_events(events_list, player)
+        game_state_list, player_location = game_loop.event_resolve(events_list, player, player_location, array)
         render_loop.display_update(DISPLAY_SURFACE, FPS_CLOCK, game_state_list)
         events_list = clear_events(events_list)
 
