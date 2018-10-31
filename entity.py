@@ -58,4 +58,5 @@ class Entity:
             if array[y_check][x_check] == 1:
                 collision_bools[i] = False
         print(collision_bools)
+        print(location)
         return collision_bools
