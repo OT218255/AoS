@@ -11,6 +11,8 @@ def display_maze(start_side):
     Calls array_gen to get a random array for the maze, and using tiledict
     displays all the tiles to the screen once. Then saves the complete screen
     as "screen.png". Also returns the array used.
+
+    :param start_side:       The side the player starts on.
     """
     width = 30
     height = 17
@@ -26,15 +28,13 @@ def display_maze(start_side):
                 'L': "Assets/Art/SandDoorLeft.png",
                 'X': "Assets/Art/SandFloor1.png"}
 
-    pygame.draw.rect(surface, BLACK, (0, 0, width*44, height*44))
-    # only needed until we sort the spawn tile
     maze = array_gen.create_room(width, height, start_side)
-    # give maze size, and spawn location
+    # gives maze size, and spawn location
     for x in range(width):      # for each tile in the maze
-        for y in range(height):  # display the apropriate tile
+        for y in range(height):  # display the appropriate tile
             tile = pygame.image.load(tile_dict[maze[y][x]])
             surface.blit(tile, (x * 44, y * 44))
-    pygame.image.save(surface, "Assets/Art/screen.jpg")  # save as a file
+    pygame.image.save(surface, "Assets/Art/screen.png")  # save as a file
     # saving as its own image might not be necessary, if we use diff surfaces
     return(maze)
 
