@@ -19,32 +19,44 @@ class Entity:
         sprite_set = entity_type_dictionary[entity_type]
         return sprite_set
 
-    #def collision_detection(self):
 
-    def incremental_movement(self, x, y, target_x, target_y):
+    def incremental_movement(self, x, y, target_x, target_y, movement_check):
         if x > target_x:
-            x -= SPEED
+            if movement_check:
+                return True
+            else:
+                x -= SPEED
         elif x < target_x:
-            x += SPEED
+            if movement_check:
+                return True
+            else:
+                x += SPEED
 
         if y > target_y:
-            y -= SPEED
+            if movement_check:
+                return True
+            else:
+                y -= SPEED
         elif y < target_y:
-            y += SPEED
+            if movement_check:
+                return True
+            else:
+                y += SPEED
 
+        if movement_check:
+            return False
         return x, y
 
     def collision_detection(self, location, array):
         cyc = cycle(([0, -1], [1, 0], [0, 1], [-1, 0]))
         # creates a cycle for getting adjacent tile location in order
-        #array = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
-        #location = [2,2]
-        bools = [True, True, True, True]
+        collision_bools = [True, True, True, True]
         for i in range(4):
             mod = next(cyc)
             x_check = location[0] + mod[0]
             y_check = location[1] + mod[1]
             if array[y_check][x_check] == 1:
-                bools[i] = False
-        print(bools)
-        return bools
+                collision_bools[i] = False
+        print(collision_bools)
+        print(location)
+        return collision_bools

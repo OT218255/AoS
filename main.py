@@ -2,37 +2,39 @@ import pygame, sys, random, event_loop, game_loop, render_loop, load_assets, dis
 from consts import *
 from entity import *
 
+
 def main():
     """
     Run the game.
 
     :return:        Nothing.
     """
+
+    ''' Initialise events, display and clock. '''
     events_list = intialise_events()
     DISPLAY_SURFACE = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
     FPS_CLOCK = pygame.time.Clock()
-    ''' Initialise events, display and clock. '''
+    ''' Load and convert sprites. '''
     player_sprites, enemy_sprites, environment_sprites = load_assets.load_sprites()
     player_sprites, enemy_sprites, environment_sprites = convert_images(
                                                                         player_sprites,
                                                                         enemy_sprites,
                                                                         environment_sprites
                                                                         )
-    ''' Load and convert sprites. '''
+    ''' Initialise maze array. '''
     array = display_maze.display_maze(0)
     for x in range(len(array)):
         for y in range(len(array[0])):
             if array[x][y] == 'X':
                 spawn_tile = (y*TILE_SIZE, x*TILE_SIZE)
                 player_location = [y, x]
-    ''' Initialise maze array. '''
+    ''' Create player and enemy objects. '''
     player = Entity("player", player_sprites, spawn_tile[0], spawn_tile[1], spawn_tile[0], spawn_tile[1])
     enemy = Entity("enemy", enemy_sprites, 166, 166, 166, 166)
-    ''' Create player and enemy objects. '''
     while True:
         ''' Main game loop. '''
-        events_list, player_location = event_loop.get_events(events_list, player, player_location, array)
-        game_state_list = game_loop.event_resolve(events_list, player)
+        events_list = event_loop.get_events(events_list, player)
+        game_state_list, player_location = game_loop.event_resolve(events_list, player, player_location, array)
         render_loop.display_update(DISPLAY_SURFACE, FPS_CLOCK, game_state_list)
         events_list = clear_events(events_list)
 
@@ -43,14 +45,14 @@ def intialise_events():
 
     :return:        Return a list of events.
     """
+    ''' Events created to be checked later. '''
     w_key_press = False
     a_key_press = False
     s_key_press = False
     d_key_press = False
     quit_event = False
-    ''' Events created to be checked later. '''
-    events_list = [w_key_press, a_key_press, s_key_press, d_key_press, quit_event]
     ''' Stores list of events for easy access. '''
+    events_list = [w_key_press, a_key_press, s_key_press, d_key_press, quit_event]
     return events_list
 
 
