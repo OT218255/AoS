@@ -19,17 +19,30 @@ class Entity:
         sprite_set = entity_type_dictionary[entity_type]
         return sprite_set
 
-    #def collision_detection(self):
 
-    def incremental_movement(self, x, y, target_x, target_y):
+    def incremental_movement(self, x, y, target_x, target_y, movement_check):
         if x > target_x:
-            x -= SPEED
+            if movement_check:
+                return True
+            else:
+                x -= SPEED
         elif x < target_x:
-            x += SPEED
+            if movement_check:
+                return True
+            else:
+                x += SPEED
 
         if y > target_y:
-            y -= SPEED
+            if movement_check:
+                return True
+            else:
+                y -= SPEED
         elif y < target_y:
-            y += SPEED
+            if movement_check:
+                return True
+            else:
+                y += SPEED
 
+        if movement_check:
+            return False
         return x, y
